@@ -1,0 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/03 18:36:10 by rayperei          #+#    #+#             */
+/*   Updated: 2026/07/03 18:36:12 by rayperei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
+#include <stdio.h> // Para comparar com o printf original
+
+int main(void)
+{
+    int meu_retorno;
+    int original_retorno;
+
+    // Teste 1: String simples
+    meu_retorno = ft_printf("Meu printf: Ola %s!\n", "Mundo");
+    original_retorno = printf("Original  : Ola %s!\n", "Mundo");
+    
+    printf("Retornos -> Meu: %d | Original: %d\n\n", meu_retorno, original_retorno);
+
+    // Teste 2: Números Hexadecimais
+    meu_retorno = ft_printf("Meu printf Hexa: %x\n", 255);
+    original_retorno = printf("Original Hexa  : %x\n", 255);
+
+    printf("Retornos -> Meu: %d | Original: %d\n", meu_retorno, original_retorno);
+
+    return (0);
+}

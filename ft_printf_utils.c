@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/03 18:33:09 by rayperei          #+#    #+#             */
+/*   Updated: 2026/07/03 18:35:06 by rayperei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include <unistd.h>
 
@@ -25,14 +37,13 @@ int	ft_putchar_count(char c)
 	write(1, &c, 1);
 	return (1);
 }
-
 int	ft_putptr_count(void *ptr)
 {
 	unsigned long	n;
 	int				count;
 
 	if (!ptr)
-		return (ft_putstr_count("(aaa)"));
+		return (ft_putstr_count("(nil)"));
 	count = ft_putstr_count("0x");
 	n = (unsigned long)ptr;
 	count += ft_putptr_recursive(n);
@@ -52,8 +63,8 @@ int	ft_putnbr_count(int c)
 		n = -n;
 	}
 	if (n >= 10)
-		count += ft_putchar_count((n / 10));
-	count += ft_putchar_count((n % 10) + '0')
+		count += ft_putnbr_count((n / 10));
+	count += ft_putchar_count((n % 10) + '0');
 	return (count);
 
 }

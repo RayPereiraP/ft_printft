@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rayperei <rayaryray14@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/03 18:35:51 by rayperei          #+#    #+#             */
+/*   Updated: 2026/07/03 18:46:13 by rayperei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include <stdarg.h>
 
@@ -24,14 +36,12 @@ int	ft_check_flag(char c, va_list args)
 	if (c == 'c')
 		count += ft_putchar_count(va_arg(args, int));
 	else if (c == 's')
-		count += ft_putchar_count(va_arg(args, char *));
-	else if (c == 'f')
-		count += ft_putchar_count(va_arg(args, void *));
-	else if (c == 'd')
-		count += ft_putchar_count(va_arg(args, int));
-	else if (c == 'o')
-		count += ft_putchar_count(va_arg(args, int));
+		count += ft_putstr_count(va_arg(args, char *));
 	else if (c == 'p')
+		count += ft_putptr_count(va_arg(args, void *));
+	else if (c == 'd' || c == 'i')
+		count += ft_putnbr_count(va_arg(args, int));
+	else if (c == 'u')
 		count += ft_putunsigned_count(va_arg(args, unsigned int));
 	else if (c == 'x')
 		count += ft_puthex_count(va_arg(args, unsigned int), 'x');
@@ -50,20 +60,18 @@ int	ft_printf(const char *format, ...)
 	chars = 0;
 	va_start(args, format);
 	while (*format)
-	{
+    {
 		if (*format == '%' && *(format + 1) != '\0')
 		{
 			format++;
-			if(ft_strchr("colocar as letras do outro aqui", *format))
+			if(ft_strchr("cspdiuxX%", *format))
 				chars += ft_check_flag(*format, args);
-			else if (*format == 'f')
-				chars += ft_new_flag();
-			else 
-				chars += ft_putchar_count('%') + ft_putchar_count(*format);
+			else
+			chars += ft_putchar_count('%') + ft_putchar_count(*format);
 		}
 		else if (*format == '%' && *(format + 1) == '\0')
 			chars += ft_putchar_count('%');
-		else 
+		else
 			chars += ft_putchar_count(*format);
 		format++;
 	}
