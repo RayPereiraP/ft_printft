@@ -1,6 +1,6 @@
 # ft_printf
 
-> Projeto desenvolvido como parte do currículo da Escola 42 por **rayperei**.
+*This project has been created as part of the 42 curriculum by rayperei.*
 
 ## 📖 Sobre o Projeto
 
