@@ -13,6 +13,10 @@
 #include "ft_printf.h"
 #include <unistd.h>
 
+/*
+Imprime uma string caractere por caractere via write(), se str for NULL,
+imprime null (esperado) e se der bom retorna a quantidade de caracteres escritos.
+*/
 int	ft_putstr_count(char *str)
 {
 	int	count;
@@ -32,11 +36,19 @@ int	ft_putstr_count(char *str)
 	return (count);
 }
 
+/*
+Escreve um unico caractere via write() e retorna 1.
+*/
 int	ft_putchar_count(char c)
 {
 	write(1, &c, 1);
 	return (1);
 }
+
+/*
+Imprime um ponteiro no formato do %p: prefixo "0x" seguido do
+endereco em hexadecimal. Se ptr for NULL, imprime nil.
+*/
 int	ft_putptr_count(void *ptr)
 {
 	unsigned long	n;
@@ -50,11 +62,16 @@ int	ft_putptr_count(void *ptr)
 	return (count);
 }
 
+/*
+Faz a impressão um numero inteiro com sinal (base 10), usado por %d e %i e 
+converte para long antes de negar para evitar overflow no caso de INT_MIN,
+ele usa recursao para imprimir na ordem correta.
+*/
 int	ft_putnbr_count(int c)
 {
 	long	n;
 	int		count;
-	
+
 	n = c;
 	count = 0;
 	if (c < 0)
@@ -66,9 +83,12 @@ int	ft_putnbr_count(int c)
 		count += ft_putnbr_count((n / 10));
 	count += ft_putchar_count((n % 10) + '0');
 	return (count);
-
 }
 
+/*
+Faz a impressão de  um numero inteiro sem sinal (base 10), usado por %u, segue a
+mesma logica recursiva de ft_putnbr_count, sem tratar negativos
+*/
 int	ft_putunsigned_count(unsigned int a)
 {
 	int		count;

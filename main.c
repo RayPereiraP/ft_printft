@@ -11,24 +11,22 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h> // Para comparar com o printf original
-
-int main(void)
+#include <stdio.h>
+/*
+Função de teste pessoal: compara a saída e o valor de retorno da ft_printf 
+com os da printf original da libc, usando %s e %x.
+*/
+int	main(void)
 {
-    int meu_retorno;
-    int original_retorno;
+	int	my_return;
+	int	original_return;
 
-    // Teste 1: String simples
-    meu_retorno = ft_printf("Meu printf: Ola %s!\n", "Mundo");
-    original_retorno = printf("Original  : Ola %s!\n", "Mundo");
-    
-    printf("Retornos -> Meu: %d | Original: %d\n\n", meu_retorno, original_retorno);
-
-    // Teste 2: Números Hexadecimais
-    meu_retorno = ft_printf("Meu printf Hexa: %x\n", 255);
-    original_retorno = printf("Original Hexa  : %x\n", 255);
-
-    printf("Retornos -> Meu: %d | Original: %d\n", meu_retorno, original_retorno);
-
-    return (0);
+	my_return = ft_printf("My printf: Hello %s!\n", "World");
+	original_return = printf("Original : Hello %s!\n", "World");
+	printf("Returns -> Mine: %d | Original: %d\n\n",
+		my_return, original_return);
+	my_return = ft_printf("My printf Hex: %x\n", 255);
+	original_return = printf("Original Hex : %x\n", 255);
+	printf("Returns -> Mine: %d | Original: %d\n", my_return, original_return);
+	return (0);
 }

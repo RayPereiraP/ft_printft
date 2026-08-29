@@ -13,12 +13,12 @@
 NAME    = libftprintf.a
 
 # Cuidado aqui: mude o ft_printf_hex.c se o seu arquivo for ft_print_hex.c!
-SRCS    = ft_printf.c ft_printf_utils.c ft_printf_hex.c
-OBJS    = $(SRCS:.c=.o)
+SRCS	= ft_printf.c ft_printf_utils.c ft_printf_hex.c
+OBJS	= $(SRCS:.c=.o)
 
-CC      = cc
-FLAGS   = -Wall -Wextra -Werror
-RM      = rm -f
+CC		= cc
+FLAGS	= -Wall -Wextra -Werror
+RM		= rm -f
 
 all: $(NAME)
 

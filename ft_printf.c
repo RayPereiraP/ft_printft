@@ -13,6 +13,10 @@
 #include "ft_printf.h"
 #include <stdarg.h>
 
+/*
+procura o caractere c dentro da string s e retorna o 
+endereco da primeira ocorrencia, ou NULL.
+*/
 char	*ft_strchr(const char *s, int c)
 {
 	if (!s)
@@ -28,6 +32,11 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
+/*
+Despachante: recebe o especificador (c) e a lista de argumentos variadicos
+ainda nao consumidos, e chama a funcao de impressao correspondente e finaliza
+retornando quantos caracteres foram escritos
+*/
 int	ft_check_flag(char c, va_list args)
 {
 	int	count;
@@ -52,22 +61,27 @@ int	ft_check_flag(char c, va_list args)
 	return (count);
 }
 
+/*
+Funcao principal: percorre a string de formato caractere por caractere, 
+delega especificadores validos ao ft_check_flag, e faz a imprissão de caracteres
+comuns diretamente e retorna o total de caracteres escritos, = ao printf orig
+*/
 int	ft_printf(const char *format, ...)
 {
 	int		chars;
-	va_list args;
+	va_list	args;
 
 	chars = 0;
 	va_start(args, format);
 	while (*format)
-    {
+	{
 		if (*format == '%' && *(format + 1) != '\0')
 		{
 			format++;
-			if(ft_strchr("cspdiuxX%", *format))
+			if (ft_strchr("cspdiuxX%", *format))
 				chars += ft_check_flag(*format, args);
 			else
-			chars += ft_putchar_count('%') + ft_putchar_count(*format);
+				chars += ft_putchar_count('%') + ft_putchar_count(*format);
 		}
 		else if (*format == '%' && *(format + 1) == '\0')
 			chars += ft_putchar_count('%');
